@@ -1,0 +1,891 @@
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.8vw;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .main-body {
+            min-height: 450px;
+        }
+
+        .main-admin {
+            min-height: 400px;
+        }
+
+
+
+        .row {
+            float: left;
+            width: 100%;
+        }
+        
+
+        .marquee p {
+            font-size: 1vw;
+        }
+
+        .demo {
+            background-color: aqua;
+            min-height: 100px;
+        }
+
+
+        /* Phần định nghĩa pd, mg */
+
+        .mt{
+            margin-top: 20px;
+        }
+
+        .pt {
+            padding-top: 100px;
+        }
+
+        .br {
+            border-right: 1px solid black;
+        }
+
+        .mb {
+            margin-bottom: 20px;
+        }
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        .mr {
+            margin-right: 2%;
+        }
+
+        .mr20 {
+            margin-right: 20px;
+        }
+
+        .ml {
+            margin-left: 2%;
+        }
+
+        .bb {
+            border-bottom: 0.5px solid #949494;
+        }
+
+
+/* Phần header */
+
+        .header {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .header-admin {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .header-admin img {
+            width: 50%;
+        }
+
+        .header img {
+            width: 100%;
+        }
+
+
+
+/* Phần nav */
+
+        .nav ul {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            padding: 0px;
+        }
+
+
+        .nav ul li a {
+            font-size: 1.1vw;
+            text-decoration: none;
+            color: #cf2603;
+            font-weight: bold;
+        }
+
+        .nav ul ul li a {
+            font-size: 1.1vw;
+            text-decoration: none;
+            color: #949494;
+            font-weight: bold;
+        }
+
+        .nav ul ul {
+            position: absolute;
+            display: none;
+        }
+
+        /* .nav ul ul li{
+            padding: 0 15px;
+        } */
+
+        .nav ul li:hover>ul {
+            display: block;
+            background-color: #FFF;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .nav ul ul li:hover {
+            background-color: #cf2603;
+            color: #FFF;
+        }
+
+        .nav ul ul li a {
+            text-align: center;
+            padding: 10px 20px;
+
+        }
+
+        .nav ul ul li a:hover {
+            color: #FFF;
+        }
+
+
+        .nav {
+            border-top: 1px #e1e1e1 dashed;
+            border-bottom: 1px #e1e1e1 dashed;
+        }
+
+        .nav li {
+            list-style: none;
+            line-height: 40px;
+        }
+
+        .nav a:hover {
+            color: #FFBA07;
+        }
+
+
+        .nav-doc ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .nav-doc ul li {
+            padding: 15px 20px;
+            border-bottom: 1px #CCC solid;
+            background-color: #fff;
+        }
+
+        .nav-doc ul li:hover {
+            background-color: lightgray;
+            border-bottom: 1px lightgray solid;
+        }
+
+        .nav-doc ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+
+/* Box-title */
+        .box-title,
+        .title-admin {
+            background-color: #cf2603;
+            color: #EEE;
+            border: 1px solid #cf2603;
+            padding: 15px;
+            font-weight: bolder;
+            text-transform: uppercase;
+        }
+
+        .box-title2 {
+            font-size: 1.5vw;
+            padding: 15px 0;
+            color: #cf2603;
+            font-weight: bolder;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+
+
+/* Box content */
+        .box-content {
+            width: 50%;
+            min-height: 200px;
+            padding: 20px;
+        }
+
+        .box-content2 {
+            border-left: 1px solid #CCC;
+            border-right: 1px solid #CCC;
+            min-height: 200px;
+        }
+
+        .box-content3 {
+            border-left: 1px solid #CCC;
+            border-bottom: 1px solid #CCC;
+            border-right: 1px solid #CCC;
+            min-height: 200px;
+        }
+
+        .box-content4 {
+            min-height: 200px;
+            padding: 10px 0px;
+        }
+
+        .box-content4 p {
+            line-height: 25px;
+            font-size: 1vw;
+        }
+
+        .box-content4 strong {
+            line-height: 25px;
+            font-size: 1vw;
+        }
+
+        .box-content4 li {
+            line-height: 25px;
+            font-size: 1vw;
+        }
+
+
+
+/* CSS-Aside */
+        .aside {
+            width: 24%;
+            float: left;
+        }
+
+        .aside-user img {
+            text-align: center;
+            border-radius: 50%;
+        }
+
+        .aside-user {
+            text-align: center;
+        }
+
+        .aside-ctsp {
+            width: 35%;
+            float: left;
+            border: #EEE 1px solid;
+            text-align: center;
+        }
+
+        .aside-ctsp img {
+            height: 250px;
+            width: 250px;
+            margin: 5px;
+        }
+
+
+
+/* Article */
+        .article-user h1 {
+            padding: 20px 0;
+        }
+
+        .article {
+            width: 74%;
+            float: left;
+        }
+
+        .article2 {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .article-ctsp {
+            width: 61%;
+            float: left;
+        }
+
+        .article-ctsp h1 {
+            font-size: 1.8vw;
+            font-weight: lighter;
+        }
+
+        .article-ctsp h2 {
+            font-weight: lighter;
+            font-size: 1vw;
+        }
+
+        .article-ctsp h3 {
+            color: #cf2603;
+            font-weight: bold;
+            font-size: 1.5vw;
+        }
+
+
+
+/* INPUT */
+
+        .formtk input[type="submit"],
+        .formtk input[type="button"],
+        .formtk input[type="reset"],
+        .formcart input[type="button"],
+        .formcart input[type="submit"],
+        .box-bl input[type="submit"],
+        .content-admin input[type="submit"],
+        .content-admin input[type="button"],
+        .content-admin input[type="reset"],
+        .filter-admin input[type="submit"],
+        .article-ctsp input[type="submit"],
+        .boxsearch input[type="submit"] {
+            padding: 8px 15px;
+            border: 1px solid #CCC;
+        }
+
+        .formtk input[type="submit"]:hover,
+        .formtk input[type="button"]:hover,
+        .formcart input[type="button"]:hover,
+        .formcart input[type="submit"]:hover,
+        .formtk input[type="reset"]:hover,
+        .hover-button input[type="submit"]:hover,
+        .box-bl input[type="submit"]:hover,
+        .content-admin input[type="submit"]:hover,
+        .content-admin input[type="button"]:hover,
+        .content-admin input[type="reset"]:hover,
+        .filter-admin input[type="submit"]:hover,
+        .article-ctsp input[type="submit"]:hover,
+        .boxsearch input[type="submit"]:hover {
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+
+
+        .dathang button {
+            padding: 8px 10px;
+            border: 1px solid #CCC;
+        }
+
+        .dathang button:hover {
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+
+
+
+
+
+        .tieude {
+            text-align: center;
+        }
+
+        .tieude h2 {
+            font-size: 1.8vw;
+            font-weight: bolder;
+            line-height: 50px;
+            margin: 50px 0 20px 0;
+        }
+
+        .tieude p {
+            font-size: 1.2vw;
+            margin-bottom: 50px;
+        }
+
+
+/* Phần bình luận */
+        .box-bl {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .box-bl h1 {
+            font-size: 1vw;
+        }
+
+        .box-ht-bl table th td {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .box-ht-bl img {
+            width: 40px;
+            border-radius: 50%;
+            border: 1px solid #949494;
+        }
+
+        .box-ht-bl h1 {
+            font-size: 1.2vw;
+        }
+
+        .box-ht-bl h2 {
+            font-size: 1vw;
+        }
+
+        .box-ht-bl table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .box-ht-bl p {
+            font-size: 1vw;
+        }
+
+        .box-ht-bl table td:nth-child(1) {
+            text-align: right;
+            padding: 5px;
+            width: 10%;
+        }
+
+        .box-ht-bl table td:nth-child(2) {
+            text-align: left;
+            width: 10%;
+        }
+
+        .box-ht-bl table td:nth-child(3) {
+            text-align: left;
+            width: 50%;
+        }
+
+        .box-ht-bl table td:nth-child(4) {
+            width: 20%;
+        }
+
+
+        .box-bl input[type="text"] {
+            width: 80%;
+            padding: 8px 10px;
+            border: 1px #CCC solid;
+        }
+
+
+
+
+/* Phần banner */
+
+        .banner {
+            min-height: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .banner img {
+            min-height: 600px;
+            width: 100%;
+
+        }
+
+
+
+
+
+        .box-sp {
+            float: left;
+            width: 32%;
+            min-height: 330px;
+            border-radius: 5px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .hover-button {
+            position: relative;
+        }
+
+        .box-sp .img {
+            width: 100%;
+            text-align: center;
+        }
+
+        .box-sp p {
+            color: #cf2603;
+            font-size: 1.2vw;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .hover-button input[type="submit"] {
+            padding: 15px 25px;
+            color: #FFF;
+            background-color: #37332e;
+            position: absolute;
+            border: none;
+            left: 80px;
+            bottom: 0px;
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+        }
+
+
+        .hover-button:hover input[type="submit"] {
+            left: 80px;
+            bottom: 80px;
+            opacity: 1;
+        }
+
+        .box-sp a {
+            text-decoration: none;
+            color: #37332e;
+            font-size: 1vw;
+        }
+
+        .img img {
+            width: 240px;
+            height: 240px;
+        }
+
+
+
+/*form tài khoản*/
+
+        .formtk {
+            line-height: 25px;
+        }
+
+        .formtk h1 {
+            color: #37332e;
+            font-size: 1.5vw;
+            padding-bottom: 100px;
+        }
+
+        .formtk input[type="text"],
+        .formtk input[type="password"],
+        .content-admin input[type="text"],
+        .content-admin input[type="number"] {
+            width: 100%;
+            border: 1px #CCC solid;
+            padding: 8px 10px;
+            border-radius: 5px;
+        }
+
+        .filter-admin input[type="text"] {
+            border: 1px #CCC solid;
+            padding: 8px 10px;
+            /* border-radius: 5px; */
+            width: 30%;
+        }
+
+        .filter-admin select {
+            border: 1px #CCC solid;
+            padding: 7px 9px;
+            /* border-radius: 5px; */
+            width: 15%;
+        }
+
+
+
+        .formtk li {
+            list-style: none;
+        }
+
+        .formtk li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .formtk li a:hover {
+            text-decoration: underline;
+            color: #cf2603;
+        }
+
+
+        .boxsearch {
+            width: 60%;
+            padding: 30px 0 20px 0;
+            float: right;
+        }
+
+        .buttondn {
+            width: 20%;
+            float: left;
+        }
+
+        .buttondn a {
+            font-size: 1.1vw;
+            text-decoration: none;
+            color: #cf2603;
+            font-weight: bold;
+        }
+
+        .formsearch {
+            width: 80%;
+            float: left;
+        }
+
+        .boxsearch input[type="text"] {
+            width: 75%;
+            padding: 8px 10px;
+            border: 1px #CCC solid;
+        }
+
+
+
+
+
+
+
+        .topsp {
+            border-bottom: 1px solid #EEE;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        /* .topsp:hover{
+            background-color:lightgray;
+            border-bottom: 1px lightgray solid;
+        } */
+
+        .topsp img {
+            width: 20%;
+            height: 30px;
+        }
+
+        .topsp a {
+            text-decoration: none;
+            color: black;
+        }
+
+
+        /*Phan admin*/
+        .title-admin {
+            background-color: #cf2603;
+            padding: 10px;
+        }
+
+
+        .formdsloai table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .formdsloai table th {
+            text-transform: uppercase;
+        }
+
+        .formdsloai table th {
+            padding: 15px;
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+
+        /* .formdsloai table th:nth-child(2){
+            width: 30%;
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+        .formdsloai table th:nth-child(3){
+            width: 40%;
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+        .formdsloai table th:nth-child(4){
+            width: 20%;
+            background-color: #cf2603;
+            color: #e1e1e1;
+        } */
+
+        .formdsloai table td {
+            padding: 10px 20px;
+            border-top: 1px solid black;
+        }
+
+
+
+
+
+/*Phan footer*/
+
+        .footer {
+            background-color: #37332e;
+            padding: 10px;
+        }
+
+        .box-footer {
+            background-color: #fff;
+            border-left: 1px solid #CCC;
+            border-bottom: 1px solid #CCC;
+            border-right: 1px solid #CCC;
+            padding: 10px;
+        }
+
+        .footer-left {
+            width: 60%;
+            float: left;
+        }
+
+        .footer-right {
+            width: 38%;
+            float: left;
+            padding: 20px;
+        }
+
+        .form-footer label {
+            color: #e1e1e1;
+            text-transform: uppercase;
+        }
+
+        .form-footer input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #e1e1e1;
+        }
+
+        .form-footer input[type="button"] {
+            background-color: #029dce;
+            border-radius: 5px;
+            color: #fff;
+            border: solid 1px #029dce;
+            margin: 10px 0;
+            font-size: 13.5px;
+            padding: 2px 10px;
+        }
+
+        .footer-left .widget-title {
+            color: #FFF;
+            font-size: 14px;
+            line-height: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Roboto Slab', serif;
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+
+        .footer-left .widget-menu {
+            list-style-type: none;
+            margin: 0px;
+            padding-left: 30px;
+        }
+
+        .footer-left .widget-menu li {
+            font-size: 14px;
+            color: #949494;
+        }
+
+
+
+
+
+/* Chi tiết sản phẩm */
+        .ctsp {
+            padding: 10px;
+        }
+
+        .ctsp h3 {
+            font-size: 1.2vw;
+            font-weight: bolder;
+        }
+
+        .ctsp p {
+            font-size: 1vw;
+            margin: 0;
+            line-height: 25px;
+        }
+
+
+
+
+
+/* Sanr phamar cungf laoi */
+        .spcl {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            list-style: none;
+        }
+
+        .spcl img {
+            width: 10%;
+            height: 50px;
+        }
+
+
+        .spcl a {
+            font-size: 1vw;
+            text-decoration: none;
+            color: black;
+        }
+
+
+
+
+
+        .formcart table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        .formcart table th {
+            text-transform: uppercase;
+        }
+
+        .formcart table th {
+            padding: 15px;
+            background-color: #cf2603;
+            color: #e1e1e1;
+        }
+
+        .formcart table td {
+            padding: 10px 20px;
+            border-top: 1px solid black;
+        }
+
+
+        .err>h2 {
+            color: #cf2603;
+        }
+
+
+
+/* Phần liên hệ */
+        .box-lienhe{
+            width: 49%;
+            float: left;
+        }
+
+
+        /* Phần giỏ hàng */
+
+        .formcart input[type="text"]{
+            width: 10%;
+            height: 40px;
+            text-align: center;
+            border: none;
+        }
+
+
+        /* CSS để tạo hiệu ứng popup */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Màu làm mờ */
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Đảm bảo lớp này ở phía trên */
+}
+
+.popup-content {
+    background-color: #fff; /* Màu nền của khung popup */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* .loader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white);
+}
+.loader img {
+    width: 100%;
+    height: 25rem;
+} */
