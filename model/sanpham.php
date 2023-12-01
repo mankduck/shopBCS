@@ -22,7 +22,7 @@ function loadAll_sanpham($kyw, $iddm)
         $sql .= " and iddanhmuc = '" . $iddm . "'";
     }
 
-    $sql .= " order by id desc";
+    $sql .= " order by id ASC";
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

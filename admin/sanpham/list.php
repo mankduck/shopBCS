@@ -19,9 +19,9 @@
     <div class="row mb"></div>
     <div class="row mb content-admin">
         <div class="row mb10">
-            <input type="button" value="Chọn tất cả">
+            <!-- <input type="button" value="Chọn tất cả">
             <input type="button" value="Bỏ chọn tất cả">
-            <input type="button" value="Xóa các mục đã chọn">
+            <input type="button" value="Xóa các mục đã chọn"> -->
             <a href="index.php?act=listspdx">
                 <input type="button" value="Đã xóa gần đây">
             </a>
@@ -33,7 +33,7 @@
             <div class="row mb10 formdsloai">
                 <table class="mb">
                     <tr>
-                        <th class="br">Chọn</th>
+                        <!-- <th class="br">Chọn</th> -->
                         <th class="br">Mã loại</th>
                         <th class="br">Tên loại</th>
                         <th class="br">Hình ảnh</th>
@@ -44,7 +44,7 @@
                     <?php
                     foreach ($listsanpham as $key => $value) {
                         $suasp = "index.php?act=suasp&id=" . $value['id'];
-                        $xoasp = "index.php?act=xoasp&id=" . $value['id'];
+                        $xoasp = "'index.php?act=xoasp&id=" . $value['id']."'";
                         $hinh = "../../upload/" . $value['image'];
                         if (is_file($hinh)) {
                             $image = "<img src='" . $hinh . "' width='80'>";
@@ -53,7 +53,7 @@
                         }
                         echo '
                                     <tr>
-                                    <td class="br"><input type="checkbox" name="" id=""></td>
+
                                     <td class="br">' . $value['id'] . '</td>
                                     <td class="br">' . $value['tensanpham'] . '</td>
                                     <td class="br"><img src="../../upload/' . $value['image'] . '" alt="" width="80px"></td>
@@ -61,7 +61,7 @@
                                     <td class="br">' . $value['view'] . '</td>
                                     <td>
                                         <a href="' . $suasp . '" ><input type="button" value="Sửa"></a>  
-                                        <a href="' . $xoasp . '" ><input type="button" value="Xóa"></a>
+                                        <a href="javascript:confirmDelete(' . $xoasp . ')" ><input type="button" value="Xóa"></a>
                                     </td>
                                 </tr>
                                     ';
@@ -72,4 +72,12 @@
 
         </form>
     </div>
+    <script>
+        function confirmDelete(delUrl) {
+            if (confirm("Bạn có muốn xóa không ? ")) {
+                document.location = delUrl;
+            }
+        }
+    </script>
+</div>
 </div>

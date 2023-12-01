@@ -28,15 +28,11 @@
                             <h2>Mã sản phẩm: ' . $id . '</h2>
 
                             <form action="index.php?act=addtocart" method="post">
-                                <input type="hidden" name="idsp" value="' . $id . '">
+                                <input type="hidden" name="id" value="' . $id . '">
                                 <input type="hidden" name="view" value="' . $view . '">
                                 <input type="hidden" name="tensanpham" value="' . $tensanpham . '">
                                 <input type="hidden" name="price" value="' . $price . '">
                                 <input type="hidden" name="image" value="' . $image . '">';
-
-                                if(isset($_SESSION['user'])){
-                                    echo '<input type="hidden" name="iduser" value="' . $_SESSION['user']['id'] . '">';
-                                };
                                  echo '
                                 <div class="row mb10">
                                 <button type="button" class="tru">-</button>

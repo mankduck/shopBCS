@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $hinh = $_SESSION['user']['image'];
 $user = $_SESSION['user']['user'];
 $hinh = "../upload/" . $hinh;

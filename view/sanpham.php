@@ -8,8 +8,10 @@
                 <?php
                 if ($iddm > 0) {
                     echo $tendm;
-                } else {
+                }elseif ($kyw != "") {
                     echo "KẾT QUẢ TÌM KIẾM";
+                }else{
+                    echo "TẤT CẢ SẢN PHẨM";
                 }
                 ?>
             </div>

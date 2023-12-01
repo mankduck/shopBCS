@@ -19,7 +19,7 @@
                     <?php
                     foreach ($listsanphamdx as $key => $value) {
                         $kpsp = "index.php?act=kpsp&id=" . $value['id'];
-                        $xoavv = "index.php?act=xoavv&id=" . $value['id'];
+                        $xoavv = "'index.php?act=xoavv&id=" . $value['id']."'";
                         $hinh = "../../upload/" . $value['image'];
                         if (is_file($hinh)) {
                             $image = "<img src='" . $hinh . "' width='80'>";
@@ -36,7 +36,7 @@
                                     <td class="br">' . $value['ngayxoa'] . '</td>
                                     <td>
                                         <a href="' . $kpsp . '" ><input type="button" value="Khôi phục"></a>  
-                                        <a href="' . $xoavv . '" ><input type="button" value="Xóa vĩnh viễn"></a>
+                                        <a href="javascript:confirmDelete(' . $xoavv . ')" ><input type="button" value="Xóa vĩnh viễn"></a>
                                     </td>
                                 </tr>
                                     ';
@@ -47,4 +47,12 @@
 
         </form>
     </div>
+    <script>
+        function confirmDelete(delUrl) {
+            if (confirm("Bạn có muốn xóa không ? ")) {
+                document.location = delUrl;
+            }
+        }
+    </script>
+</div>
 </div>

@@ -1,13 +1,9 @@
 <div class="container">
-    <div class="thongbao_dathang">
-        <div class="logo">
-            <img src="../web_ban_sach/img/logo/logo.png" alt="" width="100%" height="100%">
-        </div>
-        <h4>Cảm ơn bạn đã mua hàng tại <a href="index.php?act=trangchu">StarShop</a></h4>
+        <img src="/view/image/logo-_2_.jpg" alt="Lỗi" width="200px" >
+        <h2>Cảm ơn bạn đã mua hàng tại <a href="index.php?act=trangchu">PHGMNHD</a></h2>
 
-        <p>StarShop luôn mong muốn mang lại sự hài lòng cho quý khách.</p>
-        <h5>Trân trọng cảm ơn!</h5>
-        StarShop
-        <a href="index.php?Act=trangchu">Tiếp tục mua sắm</a>
-    </div>
+        <h3>Theo dõi đơn hàng của bạn <a href="index.php?act=donhang">TẠI ĐÂY</a></h3>
+
+        <h3>PHGMNHD luôn mong muốn mang lại sự hài lòng cho quý khách.</h3>
+        <h3>Trân trọng cảm ơn!</h3>
 </div>

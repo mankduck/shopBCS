@@ -7,7 +7,7 @@
         <form action="index.php?act=thanhtoan" method="post">
             <?php
             if (isset($_SESSION['user']['user'])) {
-                if ($giohang != []) { ?>
+                if ($_SESSION['mycart'] != []) { ?>
                     <div class="row mb10 formcart">
                         <table class="mb">
                             <tr>
@@ -22,33 +22,31 @@
                             <?php
                             $tong = 0;
                             $idmang = 0;
+                            $i = 0;
 
 
-                            foreach ($giohang as $gh) {
-                                extract($gh);
+                            foreach ($_SESSION['mycart'] as $cart) {
+                                extract($cart);
 
 
-                                $xoaspcart = '<a href="index.php?act=xoaspcart&idcart=' . $id . '" ><input type="button" value="Xóa"></a>';
-                                $image = $img_path . $image;
-                                $tong += $thanhtien;
+                                $xoaspcart = '<a href="index.php?act=xoaspcart&idcart=' . $i . '" ><input type="button" value="Xóa"></a>';
+                                $image = $img_path . $cart[2];
+                                $tong += $cart[5];
                                 echo '
-                            <input type="hidden" name="id" value="' . $id . '">
-                            <input type="hidden" name="iduser" value="' . $iduser . '">
                             <tr>
-                            <td class="br">' . $idsp . '</td><input type="hidden" name="idsp" value="' . $idsp . '">
-                            <td class="br">' . $tensanpham . '</td><input type="hidden" name="tensanpham" value="' . $tensanpham . '">
-                            <td class="br"><img src="' . $image . '" alt="" width="80px"></td><input type="hidden" name="image" value="' . $image . '">
-                            <td class="br">' . $price . '</td><input type="hidden" name="price" value="' . $price . '">
-                            <td class="br">
-                            <button type="button" class="tru">-</button>
-                            <input type="text" name="soluong" class="value" value="' . $soluong . '" readonly>
-                            <button type="button" class="cong">+</button>
-                            </td>
-                            <td class="br">' . $thanhtien . '</td>
+                            <td class="br">' . $cart[0] . '</td>
+                            <td class="br">' . $cart[1] . '</td>
+                            <td class="br"><img src="' . $image . '" alt="" width="80px"></td>
+                            <td class="br">' . $cart[3] . '</td>
+                            <td class="br">' . $cart[4] . '</td>
+                            <td class="br">' . $cart[5] . '</td>
                             <td>' . $xoaspcart . '</td>
                             </tr>
                             ';
 
+
+                            $i ++;
+                            $idmang ++;
                             }
                             echo '
                         <tr>
@@ -66,7 +64,7 @@
                         <a href="index.php?act=thanhtoan"><input type="submit" name="dathang" value="Đặt hàng"></a>
                         <?php
 
-                }else{
+                } else {
                     echo '
                         <div class="err">
                             <h2>Không có sản phẩm nào trong giỏ hàng. Quay lại <a href="index.php?act=sanpham">CỬA HÀNG</a> để tiếp tục mua sắm</h2>

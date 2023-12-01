@@ -69,3 +69,4 @@ if (is_file($hinh)) {
         </form>
     </div>
 </div>
+</div>

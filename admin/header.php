@@ -1,8 +1,15 @@
+<?php
+    if($_SESSION['user']['role'] != 1){
+        header("Location: ../index.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval'"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../view/css/style.css">
     <title>
@@ -38,6 +45,9 @@
                 </li>
                 <li>
                     <a href="index.php?act=listtk">TÀI KHOẢN</a>
+                </li>
+                <li>
+                    <a href="index.php?act=magiamgia">MÃ GIẢM GIÁ</a>
                 </li>
                 <li>
                     <a href="index.php?act=donhang">ĐƠN HÀNG</a>

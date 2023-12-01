@@ -4,6 +4,17 @@
     </div>
     <div class="row mb"></div>
     <div class="row mb content-admin">
+    <div class="row mb10">
+            <a href="index.php?act=thongkebl">
+                    <input type="button" value="Xem thống kê bình luận">
+                </a>
+                <a href="index.php?act=bieudo">
+                    <input type="button" value="Biểu đồ thống kê sản phẩm">
+                </a>
+                <a href="index.php?act=bieudodh">
+                    <input type="button" value="Biểu đồ thống kê đơn hàng">
+                </a>
+            </div>
         <form action="" method="post">
             <div class="row mb10 formdsloai">
                 <table class="mb">
@@ -32,14 +43,8 @@
                     ?>
                 </table>
             </div>
-            <div class="row mb10">
-            <a href="index.php?act=thongkebl">
-                    <input type="button" value="Xem thống kê bình luận">
-                </a>
-                <a href="index.php?act=bieudo">
-                    <input type="button" value="Xem biểu đồ">
-                </a>
-            </div>
+
         </form>
     </div>
+</div>
 </div>

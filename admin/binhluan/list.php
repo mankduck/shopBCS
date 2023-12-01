@@ -18,12 +18,18 @@
         </form>
     </div> -->
     <div class="row mb"></div>
+    
     <div class="row mb content-admin">
+    <div class="row mb10">
+                <!-- <input type="button" value="Chọn tất cả">
+                <input type="button" value="Bỏ chọn tất cả">
+                <input type="button" value="Xóa các mục đã chọn"> -->
+            </div>
         <form action="" method="post">
             <div class="row mb10 formdsloai">
                 <table class="mb">
                     <tr>
-                        <th class="br">Chọn</th>
+                        <!-- <th class="br">Chọn</th> -->
                         <th class="br">IDBL</th>
                         <th class="br">Avatar</th>
                         <th class="br">Người bình luận</th>
@@ -35,7 +41,7 @@
                     <?php
                     foreach ($listbinhluan as $bl) {
                         extract($bl);
-                        $xoabl = "index.php?act=xoabl&id=" . $id;
+                        $xoabl = "'index.php?act=xoabl&id=" . $id."'";
                         $hinh = "../upload/" . $image;
                         $err_hinh = "../view/image/anhmacdinh.jpg";
                         if (is_file($hinh)) {
@@ -45,7 +51,7 @@
                         }
                         echo '
                                     <tr>
-                                    <td class="br"><input type="checkbox" name="" id=""></td>
+
                                     <td class="br">' . $id. '</td>
                                     <td class="br">' . $image. '</td>
                                     <td class="br">' . $user. '</td>
@@ -53,7 +59,7 @@
                                     <td class="br">'.$noidung.'</td>
                                     <td class="br">' . $ngaybinhluan. '</td>
                                     <td>
-                                        <a href="' . $xoabl . '" ><input type="button" value="Xóa"></a>
+                                        <a href="javascript:confirmDelete(' . $xoabl . ')" ><input type="button" value="Xóa"></a>
                                     </td>
                                 </tr>
                                     ';
@@ -61,11 +67,14 @@
                     ?>
                 </table>
             </div>
-            <div class="row mb10">
-                <input type="button" value="Chọn tất cả">
-                <input type="button" value="Bỏ chọn tất cả">
-                <input type="button" value="Xóa các mục đã chọn">
-            </div>
         </form>
     </div>
+    <script>
+        function confirmDelete(delUrl) {
+            if (confirm("Bạn có muốn xóa không ? ")) {
+                document.location = delUrl;
+            }
+        }
+    </script>
+</div>
 </div>

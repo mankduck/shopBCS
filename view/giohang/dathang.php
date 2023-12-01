@@ -2,65 +2,85 @@
     <div class="row mb">
 
         <div class="article mr">
-            <div class="row">
+            <div class="row article mr">
                 <div class="box-title mb">
                     ĐƠN HÀNG
                 </div>
                 <div class="row">
                     <form action="" method="post">
-                        <div class="row mb10 formcart">
-                            <table class="mb">
-                                <tr>
-                                    <th class="br">Mã sản phẩm</th>
-                                    <th class="br">Tên sản phẩm</th>
-                                    <th class="br">Ảnh sản phẩm</th>
-                                    <th class="br">Giá</th>
-                                    <th class="br">Số lượng</th>
-                                    <th class="br">Thành tiền</th>
-                                </tr>
-                                <?php
-                                $tong = 0;
-                                foreach ($giohang as $cart) {
-                                    extract($cart);
-                                    $image = $img_path . $image;
-                                    $tong += $thanhtien;
-                                    echo '
+                        <?php
+                        if (isset($_SESSION['user']['user'])) { ?>
+                            <div class="row mb10 formcart">
+                                <table class="mb">
+                                    <tr>
+                                        <th class="br">Mã sản phẩm</th>
+                                        <th class="br">Tên sản phẩm</th>
+                                        <th class="br">Ảnh sản phẩm</th>
+                                        <th class="br">Giá</th>
+                                        <th class="br">Số lượng</th>
+                                        <th class="br">Thành tiền</th>
+                                    </tr>
+                                    <?php
+                                    $tong = 0;
+                                    $ship = 30000;
+                                    foreach ($_SESSION['mycart'] as $cart) {
+                                        $image = $img_path . $cart[2];
+                                        $tong += $cart[5];
+                                        echo '
                             <tr>
-                            <td class="br">' . $idsp . '</td>
-                            <td class="br">' . $tensanpham . '</td>
+                            <td class="br">' . $cart[0] . '</td>
+                            <td class="br">' . $cart[1] . '</td>
                             <td class="br"><img src="' . $image . '" alt="" width="80px"></td>
-                            <td class="br">' . $price . '</td>
-                            <td class="br">' . $soluong . '</td>
-                            <td class="br">' . $thanhtien . '</td>
+                            <td class="br">' . $cart[3] . '</td>
+                            <td class="br">' . $cart[4] . '</td>
+                            <td class="br">' . $cart[5] . '</td>
                             </tr>
                             ';
 
-                                }
-                                echo '
+                                    }
+                                    echo '
+                        <tr>
+                        <td colspan="5">Tiền tạm tính</td>
+                        <td>' . $tong . '</td>
+                        </tr>
+
+                        <tr>
+                        <td colspan="5">Phí vận chuyển</td>
+                        <td>' . $ship . '</td>
+                        </tr>
+
+                        <tr>
+                        <td colspan="5">Số tiền giảm</td>
+                        <td id="sotiengiam">0</td>
+                        </tr>
+
                         <tr>
                         <td colspan="5">Tổng đơn hàng</td>
-                        <td id="tong">' . $tong . '</td>
+                        <td id="tong">' . $tong + $ship . '</td>
                         </tr>
                         '
-                                    ?>
-                            </table>
-                        </div>
+                                        ?>
+                                </table>
+                            </div>
 
+                        <?php } else { ?>
+                            <div class="row mb10 formcart">
+                                <h1>Đăng nhập để có thể thực hiện chức năng mua hàng!</h1>
+                            </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
-            <div class="row">
+            <div class="row aside">
                 <div class="box-title mb">
                     PHƯƠNG THỨC THANH TOÁN
                 </div>
-                <div class="row mb formcart">
-                    <table>
-                        <tr>
-                            <td><input type="radio" name="pttt" checked>Thanh toán khi nhận hàng</td>
-                            <td><input type="radio" name="pttt">Chuyển khoản ngân hàng</td>
-                        </tr>
-                    </table>
-                </div>
+
+                <form action="index.php?act=ttthanhcong" method="post">
+                    <div class="row mb formcart">
+                        <input type="radio" name="pttt" value="1" checked>Thanh toán khi nhận hàng <br> <br>
+                        <input type="radio" name="pttt" value="2">Chuyển khoản ngân hàng
+                    </div>
             </div>
         </div>
         <div class="aside">
@@ -75,86 +95,86 @@
                     $phone = $_SESSION['user']['phone'];
                     $address = $_SESSION['user']['address'];
                     ?>
-                    <form action="index.php?act=ttthanhcong" method="post">
-                        <div class="row mb content-admin">
 
-                            <div class="row mb10">
-                                <label for="">Họ và tên</label><br>
-                                <input type="text" name="hoten" value="<?= $hoten; ?>">
-                            </div>
-                            <div class="row mb10">
-                                <label for="">Số điện thoại</label><br>
-                                <input type="text" name="phone" value="<?= $phone; ?>">
-                            </div>
-                            <div class="row mb10">
-                                <label for="">Địa chỉ</label><br>
-                                <input type="text" name="address" value="<?= $address; ?>">
-                            </div>
+                    <div class="row mb content-admin">
 
-                            <div class="row mb10 article mr">
-                                <label for="">Mã giảm giá</label><br>
-                                <input type="text" id="magiamgia" value="">
-                            </div>
+                        <div class="row mb10">
+                            <label for="">Họ và tên</label><br>
+                            <input type="text" name="hoten" value="<?= $hoten; ?>">
+                        </div>
+                        <div class="row mb10">
+                            <label for="">Số điện thoại</label><br>
+                            <input type="text" name="phone" value="<?= $phone; ?>">
+                        </div>
+                        <div class="row mb10">
+                            <label for="">Địa chỉ</label><br>
+                            <input type="text" name="address" value="<?= $address; ?>">
+                        </div>
 
-                            <div class="row mb10 aside dathang">
-                                <label for=""></label><br>
-                                <button onclick="check()">Áp dụng</button>
-                            </div>
+                        <div class="row mb10 article mr">
+                            <label for="">Mã giảm giá</label><br>
+                            <input type="text" name="magiamgia" id="magiamgia" value="">
+                        </div>
 
-                            <script>
+                        <div class="row mb10 aside dathang">
+                            <label for=""></label><br>
+                            <button onclick="check()">Áp dụng</button>
+                        </div>
 
-                                function check() {
+                        <script>
+                            var isDiscountApplied = false; // Biến để kiểm tra mã giảm giá đã được sử dụng hay chưa
+
+                            function check() {
+                                if (!isDiscountApplied) {
                                     var tong = document.getElementById('tong');
                                     var tongsau = document.getElementById('tongsau');
+                                    var sotiengiam = document.getElementById('sotiengiam');
                                     var maGiamGia = document.getElementById('magiamgia').value;
+
                                     jsArrMgg.forEach(function (obj) {
-                                        if (obj.magiamgia == maGiamGia) {
+                                        if (obj.magiamgia === maGiamGia) {
                                             event.preventDefault();
                                             var currentIndex = parseInt(tong.textContent);
                                             var tongNew = parseInt(currentIndex - obj.sotiengiam);
+                                            sotiengiam.textContent = "-" + obj.sotiengiam;
                                             tong.textContent = tongNew;
                                             tongsau.value = tongNew;
                                             alert("Đã dùng mã giảm giá");
+                                            isDiscountApplied = true; // Đánh dấu rằng mã giảm giá đã được sử dụng
                                         } else {
                                             event.preventDefault();
                                             alert("Mã giảm giá không tồn tại");
                                         }
                                     });
+
+                                    // if (!isDiscountApplied) {
+                                    //     event.preventDefault();
+                                    //     alert("Mã giảm giá không tồn tại");
+                                    // }
+                                } else {
+                                    event.preventDefault();
+                                    alert("Bạn đã sử dụng mã giảm giá rồi");
                                 }
-                            </script>
+                            }
+                        </script>
 
-                            <div class="row mb10">
-                                <label for="">Ghi chú</label><br>
-                                <textarea name="ghichu" id="" cols="43" rows="10"></textarea>
-                            </div>
+                        <div class="row mb10">
+                            <label for="">Ghi chú</label><br>
+                            <textarea name="ghichu" id="" cols="43" rows="10"></textarea>
                         </div>
+                    </div>
 
-                        <div class="row mb10 formcart">
 
-                            <?php
-                            foreach ($giohang as $cart) {
-                                extract($cart);
-                                $image = $img_path . $image;
-                                echo '
-                                <input type="hidden" name="iduser" value="'. $iduser .'">
-                                <input type="hidden" name="idsp" value="' . $idsp . '">
-                                <input type="hidden" name="tensanpham" value="' . $tensanpham . '">
-                                <input type="hidden" name="image" value="' . $image . '">
-                                <input type="hidden" name="price" value="' . $price . '">
-                                <input type="hidden" name="soluong" value="' . $soluong . '">
-                                <input type="hidden" name="thanhtien" value="' . $thanhtien . '">
-                            ';
+                    <div class="row mb10 formcart">
 
-                            } ?>
+                        <input type="hidden" id="tongsau" name="tong" value="<?php echo $tong + $ship; ?>">
 
-                            <input type="hidden" id="tongsau" name="tong" value="">
-
-                            <a href="index.php?act=viewcart"><input type="button" value="Quay về giỏ hàng"></a>
-                            <a href="index.php?act=ttthanhcong"><input type="submit" name="datmua" value="Đặt mua"></a>
-                    </form>
-                </div>
-            <?php } ?>
+                        <a href="index.php?act=viewcart"><input type="button" value="Quay về giỏ hàng"></a>
+                        <a href="index.php?act=ttthanhcong"><input type="submit" name="datmua" value="Đặt mua"></a>
+                        </form>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
-</div>
 </div>

@@ -10,11 +10,16 @@
     </div>
     <div class="row mb"></div>
     <div class="row mb content-admin">
+    <div class="row mb10">
+                <!-- <input type="button" value="Chọn tất cả">
+                <input type="button" value="Bỏ chọn tất cả">
+                <input type="button" value="Xóa các mục đã chọn"> -->
+            </div>
         <form action="" method="post">
             <div class="row mb10 formdsloai">
                 <table class="mb">
                     <tr>
-                        <th class="br">Chọn</th>
+                        <!-- <th class="br">Chọn</th> -->
                         <th class="br">IDTK</th>
                         <th class="br">Tên tài khoản</th>
                         <th class="br">Họ tên</th>
@@ -37,7 +42,7 @@
                         }
                         echo '
                                     <tr>
-                                    <td class="br"><input type="checkbox" name="" id=""></td>
+
                                     <td class="br">' . $value['id'] . '</td>
                                     <td class="br">' . $value['user'] . '</td>
                                     <td class="br">' . $value['hoten'] . '</td>
@@ -56,11 +61,7 @@
                     ?>
                 </table>
             </div>
-            <div class="row mb10">
-                <input type="button" value="Chọn tất cả">
-                <input type="button" value="Bỏ chọn tất cả">
-                <input type="button" value="Xóa các mục đã chọn">
-            </div>
         </form>
     </div>
+</div>
 </div>

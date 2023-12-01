@@ -1,19 +1,26 @@
 <?php
+session_start();
 include "../model/pdo.php";
 include "../model/danhmuc.php";
 include "../model/sanpham.php";
 include "../model/taikhoan.php";
 include "../model/binhluan.php";
+include "../model/donhang.php";
 include "../model/thongke.php";
 include "../model/spdaxoa.php";
+include "../model/magiamgia.php";
+include "../global.php";
 include "header.php";
 //Controler
+
+$listdh = loadAll_donhang_tgian("","");
+$listtt = loadAll_tinhtrang();
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
 
-    
+
 
         case 'adddm':
             //Kiểm tra xem người dùng có click vào nút add hay không
@@ -60,6 +67,8 @@ if (isset($_GET['act'])) {
 
 
 
+
+
         case 'updatedm':
             if (isset($_POST['capnhat']) && $_POST['capnhat']) {
                 $tenloai = $_POST['tenloai'];
@@ -72,6 +81,39 @@ if (isset($_GET['act'])) {
             break;
 
 
+
+
+            
+
+            case 'magiamgia':
+                $listmgg = loadAll_magiamgia();
+                include "magiamgia/list.php";
+                break;
+
+
+                case 'addmgg':
+                    if (isset($_POST['themmoi']) && $_POST['themmoi']) {
+                        $magiamgia = $_POST['magiamgia'];
+                        $sotiengiam = $_POST['sotiengiam'];
+                        $tgtao = date('d/m/Y h:i:sa');
+                        insert_magiamgia($magiamgia, $sotiengiam, $tgtao);
+                        $thongbao = "Thêm thành công!";
+                    }
+                    include "magiamgia/add.php";
+                    break;
+
+
+
+                    case 'xoamgg':
+                        if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                            delete_magiamgia($_GET['id']);
+                        }
+                        $listmgg = loadAll_magiamgia();
+                        include "magiamgia/list.php";
+                        break;
+            
+            
+            
 
 
         /*CONTROLER CHO SẢN PHẨM */
@@ -109,7 +151,7 @@ if (isset($_GET['act'])) {
                 }
 
 
-                if(!isset($cksp) && !isset($ckgia)){
+                if (!isset($cksp) && !isset($ckgia)) {
                     insert_sanpham($tensp, $giasp, $name_img, $mota, $iddm);
                     $thongbao = "Thêm thành công!";
                 }
@@ -138,11 +180,11 @@ if (isset($_GET['act'])) {
 
 
 
-            case 'listspdx':
-                $listsanphamdx = loadAll_sanphamdx();
-                include "sanpham/daxoa.php";
-                break;
-    
+        case 'listspdx':
+            $listsanphamdx = loadAll_sanphamdx();
+            include "sanpham/daxoa.php";
+            break;
+
 
 
 
@@ -161,25 +203,25 @@ if (isset($_GET['act'])) {
             break;
 
 
-            case 'xoavv':
-                if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                    delete_sanphamdx($_GET['id']);
-                }
-                $listsanphamdx = loadAll_sanphamdx();
-                include "sanpham/daxoa.php";
-                break;
-    
+        case 'xoavv':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_sanphamdx($_GET['id']);
+            }
+            $listsanphamdx = loadAll_sanphamdx();
+            include "sanpham/daxoa.php";
+            break;
 
-                case 'kpsp':
-                    if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                        $spkhoiphuc = loadOne_sanphamdx($_GET['id']);
-                        extract($spkhoiphuc);
-                        insert_sanpham($tensanpham, $price, $image, $mota, $iddanhmuc);
-                        delete_sanphamdx($_GET['id']);
-                    }
-                    $listsanphamdx = loadAll_sanphamdx();
-                    include "sanpham/daxoa.php";
-                    break;
+
+        case 'kpsp':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $spkhoiphuc = loadOne_sanphamdx($_GET['id']);
+                extract($spkhoiphuc);
+                insert_sanpham($tensanpham, $price, $image, $mota, $iddanhmuc);
+                delete_sanphamdx($_GET['id']);
+            }
+            $listsanphamdx = loadAll_sanphamdx();
+            include "sanpham/daxoa.php";
+            break;
 
 
 
@@ -221,6 +263,62 @@ if (isset($_GET['act'])) {
             include "sanpham/list.php";
             break;
 
+
+
+
+
+        case 'donhang':
+
+            if (isset($_POST['checkdh']) && $_POST['checkdh']) {
+                $dau = date_create($_POST['tgdau']);
+                $tgdau = date_format($dau, 'Y-m-d H:i:s');
+                $cuoi = date_create($_POST['tgcuoi']);
+                $tgcuoi = date_format($cuoi, 'Y-m-d H:i:s');
+                // echo $tgdau;
+                // echo $tgcuoi;
+                // die();
+            } else {
+                $tgdau = "";
+                $tgcuoi = "";
+            }
+
+            if (isset($_POST['capnhatdh']) && $_POST['capnhatdh']) {
+                $tinhtrang = $_POST['tinhtrang'];
+                $id = $_POST['iddonhang'];
+                update_trangthai($tinhtrang, $id);
+            }
+            $listdh = loadAll_donhang_tgian($tgdau, $tgcuoi);
+            include "donhang/donhang.php";
+            break;
+
+        //CASE CHI TIẾT ĐƠN HÀNG
+        case 'chitietdonhang':
+            if (isset($_GET['iddonhang'])) {
+                $iddonhang = $_GET['iddonhang'];
+                $listctdh = loadAll_ctdonhang_sp($iddonhang);
+            }
+            include "donhang/chitietdonhang.php";
+            break;
+
+
+
+            // case 'suadon':
+            //     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+            //         $suadonhang = loadOne_donhang($_GET['id']);
+    
+            //     }
+            //     include "donhang/update.php";
+            //     break;
+
+
+                // case 'updatedh':
+
+                //     $listdh = loadAll_donhang();
+                //     include "donhang/donhang.php";
+                //     break;
+        
+    
+    
 
 
 
@@ -267,27 +365,27 @@ if (isset($_GET['act'])) {
             break;
 
 
-            case 'xoatk':
-                if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                    delete_taikhoan($_GET['id']);
-                }
-                $listtk = loadAll_taikhoan("");
-                include "taikhoan/list.php";
-                break;
+        case 'xoatk':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_taikhoan($_GET['id']);
+            }
+            $listtk = loadAll_taikhoan("");
+            include "taikhoan/list.php";
+            break;
 
 
 
-    
-    
-    
-                case 'dsbl':
-                    $listbinhluan = loadAll_binhluan(0);
-                    include "binhluan/list.php";
-                    break;
-        
 
 
-        
+
+        case 'dsbl':
+            $listbinhluan = loadAll_binhluan(0);
+            include "binhluan/list.php";
+            break;
+
+
+
+
         case 'xoabl':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_binhluan($_GET['id']);
@@ -298,27 +396,36 @@ if (isset($_GET['act'])) {
 
 
 
-        
-            case 'thongke':
-                $listthongke = loadAll_thongke();
-                include "thongke/list.php";
+
+        case 'thongke':
+            $listthongke = loadAll_thongke();
+            include "thongke/list.php";
+            break;
+
+
+        case 'thongkebl':
+            $listthongkebl = loadAll_thongkebl();
+            include "thongke/thongkebl.php";
+            break;
+
+
+        case 'bieudo':
+            $listthongke = loadAll_thongke();
+            include "thongke/bieudo.php";
+            break;
+
+
+            case 'bieudodh':
+                $listthongkedh = loadAll_tongdonhang();
+                include "thongke/bieudodh.php";
                 break;
     
+                case 'bieudodhngay':
+                    $listthongkedhngay = loadAll_tongdonhang_ngay();
+                    include "thongke/bieudodhngay.php";
+                    break;
 
-                case 'thongkebl':
-                    $listthongkebl = loadAll_thongkebl();
-                    include "thongke/thongkebl.php";
-                    break;
-            
-    
-                case 'bieudo':
-                    $listthongke = loadAll_thongke();
-                    include "thongke/bieudo.php";
-                    break;
-        
-        
-        
-    
+
 
 
 

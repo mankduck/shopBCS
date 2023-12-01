@@ -328,6 +328,8 @@
         .formtk input[type="reset"],
         .formcart input[type="button"],
         .formcart input[type="submit"],
+        input[type="date"],
+        select,
         .box-bl input[type="submit"],
         .content-admin input[type="submit"],
         .content-admin input[type="button"],

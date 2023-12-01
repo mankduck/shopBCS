@@ -4,7 +4,6 @@ include "model/pdo.php";
 include "model/sanpham.php";
 include "model/danhmuc.php";
 include "model/taikhoan.php";
-include "model/giohang.php";
 include "model/donhang.php";
 include "model/magiamgia.php";
 include "model/validate.php";
@@ -16,6 +15,8 @@ include "global.php";
 
 $spmoi = loadAll_sanpham_home();
 $dstop10 = loadAll_sanpham_top10();
+
+
 
 if (!isset($_SESSION['mycart'])) {
     $_SESSION['mycart'] = [];
@@ -303,64 +304,52 @@ if (isset($_GET['act']) && $_GET['act']) {
             $dmsp = loadAll_sanpham($kyw, $iddm);
             $tendm = load_tendm($iddm);
             include "view/sanpham.php";
-
             break;
+
+
+        // case 'sanpham':
+        //     $dmsp = loadAll_sanpham($kyw, $iddm);
+        //     include "view/sanpham.php";
+        //     break;
 
 
         //CASE THÊM GIỎ HÀNG
         case 'addtocart':
             if (isset($_POST['addtocart']) && $_POST['addtocart']) {
-                if (isset($_SESSION['user'])) {
-                    $idsp = $_POST['idsp'];
-                    $tensanpham = $_POST['tensanpham'];
-                    $price = $_POST['price'];
-                    $image = $_POST['image'];
+                $id = $_POST['id'];
+                $tensanpham = $_POST['tensanpham'];
+                $price = $_POST['price'];
+                $image = $_POST['image'];
+
+                if (isset($_POST['soluong'])) {
                     $soluong = $_POST['soluong'];
-                    $iduser = $_POST['iduser'];
+                } else {
+                    $soluong = 1;
+                }
 
 
-                    $giohangcheck = loadOne_giohang($iduser);
-                    $check = 0;
-                    // $i = 0;
+                $check = 0;
+                $i = 0;
 
-                    foreach ($giohangcheck as $key => $value) {
-                        if ($idsp == $value['idsp']) {
-                            $newsl = $soluong + $value['soluong'];
-                            $newtt = $newsl * $price;
-                            update_giohang_sl($idsp, $newsl, $newtt);
-                            $check = 1;
-                            break;
-                        }
-                        // $i++;
+
+                foreach ($_SESSION['mycart'] as $key => $item) {
+                    if ($item['1'] == $tensanpham) {
+                        $newsl = $item[4] + $soluong;
+                        $newtt = $newsl * $price;
+                        $_SESSION['mycart'][$i][4] = $newsl;
+                        $_SESSION['mycart'][$i][5] = $newtt;
+                        $check = 1;
+                        break;
                     }
+                    $i++;
+                }
 
-
-                    if ($check == 0) {
-                        $thanhtien = $soluong * $price;
-                        insert_giohang($idsp, $tensanpham, $image, $price, $soluong, $thanhtien, $iduser);
-                    }
-
-                    // $check = 0;
-                    // $i = 0;
-
-
-                    // foreach ($giohang as $key => $value) {
-                    //     if ($value['tensanpham'] == $tensanpham) {
-                    //         $newsl = $item[4] + $soluong;
-                    //         $newtt = $newsl * $price;
-                    //         $_SESSION['mycart'][$i][4] = $newsl;
-                    //         $check = 1;
-                    //         break;
-                    //     }
-                    //     $i++;
-                    // }
-
-                    // if ($check == 0) {
-                    //     $thanhtien = $soluong * $price;
-                    // }
+                if ($check == 0) {
+                    $thanhtien = $soluong * $price;
+                    $spadd = [$id, $tensanpham, $image, $price, $soluong, $thanhtien];
+                    array_push($_SESSION['mycart'], $spadd);
                 }
             }
-            $giohang = loadOne_giohang($iduser);
             include "view/giohang/giohang.php";
             break;
 
@@ -373,8 +362,9 @@ if (isset($_GET['act']) && $_GET['act']) {
         //CASE XÓA GIỎ HÀNG 
         case 'xoaspcart':
             if (isset($_GET['idcart'])) {
-                $id = $_GET['idcart'];
-                delete_giohang($id);
+                array_splice($_SESSION['mycart'], $_GET['idcart'], 1);
+            } else {
+                $_SESSION['mycart'] = [];
             }
             header('Location: index.php?act=viewcart');
             break;
@@ -383,13 +373,8 @@ if (isset($_GET['act']) && $_GET['act']) {
 
 
 
-
         //CASE GIỎ HÀNG
         case 'viewcart':
-            if (isset($_SESSION['user'])) {
-                $iduser = $_SESSION['user']['id'];
-                $giohang = loadOne_giohang($iduser);
-            }
             include "view/giohang/giohang.php";
             break;
 
@@ -401,22 +386,7 @@ if (isset($_GET['act']) && $_GET['act']) {
         //CASE THANH TOÁN
         case 'thanhtoan':
             if (isset($_POST['dathang']) && $_POST['dathang']) {
-                $iduser = $_POST['iduser'];
-                $giohangcheck = loadOne_giohang($iduser);
 
-                var_dump($giohangcheck);
-                die;
-
-                foreach ($giohangcheck as $key => $value) {
-                    $id = $_POST['id'];
-                    $idsp = $_POST['idsp'];
-                    $soluong = $_POST['soluong'];
-                    $price = $_POST['price'];
-                    $thanhtien = $soluong * $price;
-                    update_giohang_sl($idsp, $soluong, $thanhtien);
-                }
-
-                $giohang = loadOne_giohang($iduser);
 
                 $arrMgg = loadAll_magiamgia();
                 echo '<script>';
@@ -430,32 +400,77 @@ if (isset($_GET['act']) && $_GET['act']) {
             break;
 
 
+        case 'vnpay':
+            include "view/thanhtoan/vnpay.php";
+            break;
+
+
 
         case 'ttthanhcong':
             if (isset($_POST['datmua']) && $_POST['datmua']) {
-                $idsp = $_POST['idsp'];
-                $madonhang = "PMD".rand(1,99999);
-                $tensanpham = $_POST['tensanpham'];
-                $price = $_POST['price'];
-                $image = $_POST['image'];
-                $soluong = $_POST['soluong'];
-                $iduser = $_POST['iduser'];
-                $thanhtien = $_POST['thanhtien'];
-                $tong = $_POST['tong'];
 
+
+                // $idsp = $_SESSION['mycart'][0];
+                // $soluong = $_SESSION['mycart'][4];
+                // $thanhtien = $_SESSION['mycart'][5];
+
+
+                $madonhang = "PMD" . rand(1, 999999);
+                $_SESSION['madonhang'] = $madonhang;
                 $hoten = $_POST['hoten'];
                 $phone = $_POST['phone'];
-                $address = $_POST['address'];
+                $diachi = $_POST['address'];
                 $ghichu = $_POST['ghichu'];
+                $pttt = $_POST['pttt'];
+                $tong = $_POST['tong'];
+                $_SESSION['tong'] = $tong;
+                $magiamgia = $_POST['magiamgia'];
 
-                $trangthai = 1;
+                $tinhtrang = 1;
 
-                $ngaydat = date('h:i:sa d/m/Y');
+                $ngaydat = date('Y-m-d H:i:s');
+                $iduser = $_SESSION['user']['id'];
 
-                insert_donhang($madonhang, $iduser, $hoten, $phone, $address, $ghichu, $idsp, $tensanpham, $price, $image, $soluong, $thanhtien, $tong, $trangthai, $ngaydat);
 
-                delete_giohang_tc($iduser);
+                if ($pttt == 1) {
+                    insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
 
+                    $listdh = loadAll_donhang();
+                    foreach ($listdh as $key => $value) {
+                        foreach ($_SESSION['mycart'] as $cart) {
+                            $idsp = $cart[0];
+                            $soluong = $cart[4];
+                            $thanhtien = $cart[5];
+
+                            $iddonhang = $value['iddonhang'];
+
+                            insert_ctdonhang($idsp, $soluong, $thanhtien, $iddonhang);
+                        }
+                        break;
+                    }
+
+                    $_SESSION['mycart'] = [];
+                } else {
+                    insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
+
+                    $listdh = loadAll_donhang();
+                    foreach ($listdh as $key => $value) {
+                        foreach ($_SESSION['mycart'] as $cart) {
+                            $idsp = $cart[0];
+                            $soluong = $cart[4];
+                            $thanhtien = $cart[5];
+
+
+                            $iddonhang = $value['iddonhang'];
+
+                            insert_ctdonhang($idsp, $soluong, $thanhtien, $iddonhang);
+                        }
+                        break;
+                    }
+
+                    $_SESSION['mycart'] = [];
+                    header("Location: index.php?act=vnpay");
+                }
             }
             include "view/giohang/ttthanhcong.php";
 
@@ -466,7 +481,37 @@ if (isset($_GET['act']) && $_GET['act']) {
 
         //CASE ĐƠN HÀNG
         case 'donhang':
+            if (isset($_SESSION['user'])) {
+                $iduser = $_SESSION['user']['id'];
+                $listdh = loadAll_donhang_user($iduser);
+            }
+
             include "view/taikhoan/donhang.php";
+            break;
+
+
+        case 'huydon':
+            if (isset($_GET['id']) && $_GET['id']) {
+                $iddonhang = $_GET['id'];
+                $tinhtrang = 5;
+
+                update_trangthai($tinhtrang, $iddonhang);
+            }
+            if (isset($_SESSION['user'])) {
+                $iduser = $_SESSION['user']['id'];
+                $listdh = loadAll_donhang_user($iduser);
+            }
+            include "view/taikhoan/donhang.php";
+            break;
+
+
+        //CASE CHI TIẾT ĐƠN HÀNG
+        case 'chitietdonhang':
+            if (isset($_GET['iddonhang'])) {
+                $iddonhang = $_GET['iddonhang'];
+                $listctdh = loadAll_ctdonhang_sp($iddonhang);
+            }
+            include "view/taikhoan/chitietdonhang.php";
             break;
 
 
