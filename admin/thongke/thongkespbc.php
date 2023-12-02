@@ -3,14 +3,14 @@
                 <a href="index.php?act=thongke">
                     <input type="button" value="Về trang thống kê">
                 </a>
-                <a href="index.php?act=thongkespbc">
-                    <input type="button" value="Sản phẩm bán chạy">
+                <a href="index.php?act=bieudo">
+                    <input type="button" value="Thống kê sản phẩm theo danh mục">
                 </a>
             </div>
     <div class="row">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 <div
-id="myChart" style="width:100%; max-width:600px; height:500px;">
+id="myChart" style="width:100%; max-width:1500px; height:500px;">
 </div>
 
 <script>
@@ -21,10 +21,10 @@ function drawChart() {
 
 // Set Data
 const data = google.visualization.arrayToDataTable([
-  ['Danh mục', 'Số lượng sản phẩm'],
+  ['Sản phẩm', 'Số lượng sản phẩm'],
   <?php
-    $tongdm = count($listthongke);
-    foreach ($listthongke as $tk) {
+    $tongdm = count($listthongkespbc);
+    foreach ($listthongkespbc as $tk) {
         extract($tk);
         $i = 1;
         if($i == $tongdm){
@@ -32,7 +32,7 @@ const data = google.visualization.arrayToDataTable([
         }else{
             $dau = ",";
         }
-        echo "  ['".$tk['tendm']."',".$tk['countsp']."]" . $dau;
+        echo "  ['".$tk['tensanpham']."',".$tk['tongsoluong']."]" . $dau;
         $i++;
     }
   ?>
@@ -40,7 +40,7 @@ const data = google.visualization.arrayToDataTable([
 
 // Set Options
 const options = {
-  title:'Thống kê sản phẩm theo danh mục',
+  title:'Thống kê sản phẩm bán chạy',
   is3D:true
 };
 

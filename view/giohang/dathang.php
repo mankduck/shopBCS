@@ -121,7 +121,7 @@
                             <button onclick="check()">Áp dụng</button>
                         </div>
 
-                        <script>
+                        <!-- <script>
                             var isDiscountApplied = false; // Biến để kiểm tra mã giảm giá đã được sử dụng hay chưa
 
                             function check() {
@@ -130,22 +130,101 @@
                                     var tongsau = document.getElementById('tongsau');
                                     var sotiengiam = document.getElementById('sotiengiam');
                                     var maGiamGia = document.getElementById('magiamgia').value;
+                                    var formattedTime = moment().format('Y-M-D H:m:s');
+                                    console.log(formattedTime);
+                                    var parsedDate1 = new Date(formattedTime);
+                                    console.log(parsedDate1);
+                                    var timestampDate1 = parsedDate1.getTime();
+
+                                    console.log(timestampDate1);
 
                                     jsArrMgg.forEach(function (obj) {
-                                        if (obj.magiamgia === maGiamGia) {
-                                            event.preventDefault();
-                                            var currentIndex = parseInt(tong.textContent);
-                                            var tongNew = parseInt(currentIndex - obj.sotiengiam);
-                                            sotiengiam.textContent = "-" + obj.sotiengiam;
-                                            tong.textContent = tongNew;
-                                            tongsau.value = tongNew;
-                                            alert("Đã dùng mã giảm giá");
-                                            isDiscountApplied = true; // Đánh dấu rằng mã giảm giá đã được sử dụng
+                                        if (obj.magiamgia == maGiamGia) {
+                                            var parsedDate2 = new Date(obj.thoigianhet);
+                                            var timestampDate2 = parsedDate2.getTime();
+                                            console.log(timestampDate2);
+                                            if (timestampDate2 >= timestampDate1) {
+                                                event.preventDefault();
+                                                var currentIndex = parseInt(tong.textContent);
+                                                var tongNew = parseInt(currentIndex - obj.sotiengiam);
+                                                sotiengiam.textContent = "-" + obj.sotiengiam;
+                                                tong.textContent = tongNew;
+                                                tongsau.value = tongNew;
+                                                alert("Đã dùng mã giảm giá");
+                                                isDiscountApplied = true; // Đánh dấu rằng mã giảm giá đã được sử dụng
+                                                return;
+                                            } else {
+                                                event.preventDefault();
+                                                alert("Mã giảm giá đã hết hạn!");
+                                                return;
+                                            }
+
                                         } else {
                                             event.preventDefault();
                                             alert("Mã giảm giá không tồn tại");
+                                            return;
                                         }
                                     });
+
+                                    // if (!isDiscountApplied) {
+                                    //     event.preventDefault();
+                                    //     alert("Mã giảm giá không tồn tại");
+                                    // }
+                                } else {
+                                    event.preventDefault();
+                                    alert("Bạn đã sử dụng mã giảm giá rồi");
+                                }
+                            }
+                        </script> -->
+
+                        <script>
+                            var isDiscountApplied = false; // Biến để kiểm tra mã giảm giá đã được sử dụng hay chưa
+
+                            function check() {
+                                if (!isDiscountApplied) {
+                                    var isDiscountTrue = false;
+                                    var tong = document.getElementById('tong');
+                                    var tongsau = document.getElementById('tongsau');
+                                    var sotiengiam = document.getElementById('sotiengiam');
+                                    var maGiamGia = document.getElementById('magiamgia').value;
+                                    var formattedTime = moment().format('Y-M-D H:m:s');
+                                    console.log(formattedTime);
+                                    var parsedDate1 = new Date(formattedTime);
+                                    console.log(parsedDate1);
+                                    var timestampDate1 = parsedDate1.getTime();
+
+                                    console.log(timestampDate1);
+
+                                    jsArrMgg.forEach(function (obj) {
+                                        if (obj.magiamgia == maGiamGia) {
+                                            isDiscountTrue = true;
+                                            var parsedDate2 = new Date(obj.thoigianhet);
+                                            var timestampDate2 = parsedDate2.getTime();
+                                            console.log(timestampDate2);
+                                            if (timestampDate2 >= timestampDate1) {
+                                                event.preventDefault();
+                                                var currentIndex = parseInt(tong.textContent);
+                                                var tongNew = parseInt(currentIndex - obj.sotiengiam);
+                                                sotiengiam.textContent = "-" + obj.sotiengiam;
+                                                tong.textContent = tongNew;
+                                                tongsau.value = tongNew;
+                                                alert("Đã dùng mã giảm giá");
+                                                isDiscountApplied = true; // Đánh dấu rằng mã giảm giá đã được sử dụng
+                                                return;
+                                            } else {
+                                                event.preventDefault();
+                                                alert("Mã giảm giá đã hết hạn!");
+                                                return;
+                                            }
+                                        }
+                                    });
+
+                                    if (!isDiscountTrue) {
+                                        event.preventDefault();
+                                        alert("Mã giảm giá không tồn tại");
+                                        return;
+                                    }
+
 
                                     // if (!isDiscountApplied) {
                                     //     event.preventDefault();

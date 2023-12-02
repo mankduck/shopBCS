@@ -17,6 +17,10 @@
                 <input type="text" name="sotiengiam" id="">
             </div>
             <div class="row mb10">
+                <label for="">Thời gian hết hạn</label><br>
+                <input type="datetime-local" name="tghet" id="">
+            </div>
+            <div class="row mb10">
                 <input type="submit" value="Thêm mới" name="themmoi">
                 <input type="reset" value="Nhập lại">
                 <a href="index.php?act=magiamgia">

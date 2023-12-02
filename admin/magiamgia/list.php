@@ -21,6 +21,7 @@
                         <th class="br">Mã giảm giá</th>
                         <th class="br">Số tiền giảm</th>
                         <th class="br">Thời gian tạo</th>
+                        <th class="br">Thời gian hết hạn</th>
                         <th>Tùy chỉnh</th>
                     </tr>
                     <?php
@@ -34,6 +35,7 @@
                                     <td class="br">' . $value['magiamgia'] . '</td>
                                     <td class="br">' . $value['sotiengiam'] . '</td>
                                     <td class="br">' . $value['thoigiantao'] . '</td>
+                                    <td class="br">' . $value['thoigianhet'] . '</td>
                                     <td>
                                         <a href="' . $suamgg . '" ><input type="button" value="Sửa"></a>  
                                         <a href="javascript:confirmDelete(' . $xoamgg . ')" ><input type="button" value="Xóa"></a>

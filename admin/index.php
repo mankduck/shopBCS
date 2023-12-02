@@ -13,7 +13,7 @@ include "../global.php";
 include "header.php";
 //Controler
 
-$listdh = loadAll_donhang_tgian("","");
+$listdh = loadAll_donhang_tgian("", "");
 $listtt = loadAll_tinhtrang();
 
 if (isset($_GET['act'])) {
@@ -83,38 +83,66 @@ if (isset($_GET['act'])) {
 
 
 
-            
 
-            case 'magiamgia':
+
+        case 'magiamgia':
+            $listmgg = loadAll_magiamgia();
+            include "magiamgia/list.php";
+            break;
+
+
+        case 'addmgg':
+            if (isset($_POST['themmoi']) && $_POST['themmoi']) {
+                $magiamgia = $_POST['magiamgia'];
+                $sotiengiam = $_POST['sotiengiam'];
+                $het = date_create($_POST['tghet']);
+                $tghet = date_format($het, 'Y-m-d H:i:s');
+                $tgtao = date('Y-m-d H:i:s');
+
+                insert_magiamgia($magiamgia, $sotiengiam, $tgtao, $tghet);
+                $thongbao = "Thêm thành công!";
+            }
+            include "magiamgia/add.php";
+            break;
+
+
+
+        case 'xoamgg':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_magiamgia($_GET['id']);
+            }
+            $listmgg = loadAll_magiamgia();
+            include "magiamgia/list.php";
+            break;
+
+
+
+
+        case 'suamgg':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $suamgg = loadOne_magiamgia($_GET['id']);
+
+            }
+            include "magiamgia/update.php";
+            break;
+
+
+            case 'updatemgg':
+                if (isset($_POST['capnhat']) && $_POST['capnhat']) {
+                    $id = $_POST['id'];
+                    $magiamgia = $_POST['magiamgia'];
+                    $sotiengiam = $_POST['sotiengiam'];
+                    $het = date_create($_POST['tghet']);
+                    $tghet = date_format($het, 'Y-m-d H:i:s');
+                    update_magiamgia($id, $magiamgia, $sotiengiam, $tghet);
+                    $thongbao = "Cập nhật thành công!";
+                }
                 $listmgg = loadAll_magiamgia();
                 include "magiamgia/list.php";
                 break;
-
-
-                case 'addmgg':
-                    if (isset($_POST['themmoi']) && $_POST['themmoi']) {
-                        $magiamgia = $_POST['magiamgia'];
-                        $sotiengiam = $_POST['sotiengiam'];
-                        $tgtao = date('d/m/Y h:i:sa');
-                        insert_magiamgia($magiamgia, $sotiengiam, $tgtao);
-                        $thongbao = "Thêm thành công!";
-                    }
-                    include "magiamgia/add.php";
-                    break;
-
-
-
-                    case 'xoamgg':
-                        if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-                            delete_magiamgia($_GET['id']);
-                        }
-                        $listmgg = loadAll_magiamgia();
-                        include "magiamgia/list.php";
-                        break;
-            
-            
-            
-
+    
+    
+    
 
         /*CONTROLER CHO SẢN PHẨM */
 
@@ -286,6 +314,7 @@ if (isset($_GET['act'])) {
                 $tinhtrang = $_POST['tinhtrang'];
                 $id = $_POST['iddonhang'];
                 update_trangthai($tinhtrang, $id);
+                echo '<script>alert("Thay đổi trạng thái đơn hàng thành công!");</script>';
             }
             $listdh = loadAll_donhang_tgian($tgdau, $tgcuoi);
             include "donhang/donhang.php";
@@ -302,23 +331,7 @@ if (isset($_GET['act'])) {
 
 
 
-            // case 'suadon':
-            //     if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-            //         $suadonhang = loadOne_donhang($_GET['id']);
-    
-            //     }
-            //     include "donhang/update.php";
-            //     break;
 
-
-                // case 'updatedh':
-
-                //     $listdh = loadAll_donhang();
-                //     include "donhang/donhang.php";
-                //     break;
-        
-    
-    
 
 
 
@@ -409,21 +422,27 @@ if (isset($_GET['act'])) {
             break;
 
 
+            case 'thongkespbc':
+                $listthongkespbc = loadAll_thongke_spbc();
+                include "thongke/thongkespbc.php";
+                break;
+    
+
         case 'bieudo':
             $listthongke = loadAll_thongke();
             include "thongke/bieudo.php";
             break;
 
 
-            case 'bieudodh':
-                $listthongkedh = loadAll_tongdonhang();
-                include "thongke/bieudodh.php";
-                break;
-    
-                case 'bieudodhngay':
-                    $listthongkedhngay = loadAll_tongdonhang_ngay();
-                    include "thongke/bieudodhngay.php";
-                    break;
+        case 'bieudodh':
+            $listthongkedh = loadAll_tongdonhang();
+            include "thongke/bieudodh.php";
+            break;
+
+        case 'bieudodhngay':
+            $listthongkedhngay = loadAll_tongdonhang_ngay();
+            include "thongke/bieudodhngay.php";
+            break;
 
 
 

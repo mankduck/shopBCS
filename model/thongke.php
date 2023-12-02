@@ -6,6 +6,15 @@ function loadAll_thongke()
     return $listthongke;
 }
 
+function loadAll_thongke_spbc()
+{
+    $sql = "SELECT sanpham.tensanpham AS tensanpham, chitietdonhang.idsp, SUM(soluong) AS tongsoluong
+    FROM chitietdonhang INNER JOIN sanpham ON sanpham.id = chitietdonhang.idsp
+    GROUP BY chitietdonhang.idsp ORDER BY tongsoluong DESC";
+    $listthongke = pdo_query($sql);
+    return $listthongke;
+}
+
 function loadAll_thongkebl()
 {
     $sql = "SELECT sanpham.id as masp, sanpham.tensanpham as tensp, sanpham.image as anhsp, count(binhluan.id) AS countbl FROM binhluan LEFT JOIN sanpham ON sanpham.id = binhluan.idsp GROUP BY sanpham.id ORDER BY sanpham.id DESC";
