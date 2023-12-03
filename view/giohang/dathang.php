@@ -79,7 +79,8 @@
                 <form action="index.php?act=ttthanhcong" method="post">
                     <div class="row mb formcart">
                         <input type="radio" name="pttt" value="1" checked>Thanh toán khi nhận hàng <br> <br>
-                        <input type="radio" name="pttt" value="2">Chuyển khoản ngân hàng
+                        <input type="radio" name="pttt" value="2">Chuyển khoản ngân hàng<br> <br>
+                        <input type="radio" name="pttt" value="3">Thanh toán qua Momo
                     </div>
             </div>
         </div>

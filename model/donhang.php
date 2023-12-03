@@ -14,14 +14,19 @@ function loadAll_donhang()
     return $listgiohang; 
 }
 
-function loadAll_donhang_tgian($tgdau, $tgcuoi)
+function loadAll_donhang_tgian($tgdau, $tgcuoi, $kyw)
 {
-    $sql = "SELECT * FROM donhang";
+    $sql = "SELECT * FROM donhang WHERE 1";
     if ($tgdau != "" && $tgcuoi != ""){
-        $sql .= " WHERE ngaydat >= '$tgdau' AND ngaydat <= '$tgcuoi'";
-    };
+        $sql .= " AND ngaydat >= '$tgdau' AND ngaydat <= '$tgcuoi'";
+    }
+
+    if($kyw != ""){
+        $sql .= " AND madonhang LIKE '%" . $kyw . "%'";
+    }
     $sql .= " ORDER BY iddonhang DESC";
     // var_dump($sql);
+    // die();
     $listgiohang = pdo_query($sql);
     return $listgiohang; 
 }

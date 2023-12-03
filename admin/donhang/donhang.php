@@ -7,6 +7,7 @@
         <form action="index.php?act=donhang" method="post">
             <input type="date" name="tgdau" id="">
             <input type="date" name="tgcuoi" id="">
+            <input type="text" name="kyw" placeholder="Nhập mã đơn hàng" >
             <input type="submit" name="checkdh" value="Tìm kiếm">
         </form>
         </div>

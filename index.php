@@ -404,6 +404,11 @@ if (isset($_GET['act']) && $_GET['act']) {
             include "view/thanhtoan/vnpay.php";
             break;
 
+            case 'momo':
+                include "view/thanhtoan/momo.php";
+                break;
+    
+
 
 
         case 'ttthanhcong':
@@ -450,7 +455,7 @@ if (isset($_GET['act']) && $_GET['act']) {
                     }
 
                     $_SESSION['mycart'] = [];
-                } else {
+                }elseif ($pttt == 2) {
                     insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
 
                     $listdh = loadAll_donhang();
@@ -470,6 +475,26 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                     $_SESSION['mycart'] = [];
                     header("Location: index.php?act=vnpay");
+                }else {
+                    insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
+
+                    $listdh = loadAll_donhang();
+                    foreach ($listdh as $key => $value) {
+                        foreach ($_SESSION['mycart'] as $cart) {
+                            $idsp = $cart[0];
+                            $soluong = $cart[4];
+                            $thanhtien = $cart[5];
+
+
+                            $iddonhang = $value['iddonhang'];
+
+                            insert_ctdonhang($idsp, $soluong, $thanhtien, $iddonhang);
+                        }
+                        break;
+                    }
+
+                    $_SESSION['mycart'] = [];
+                    header("Location: index.php?act=momo");
                 }
             }
             include "view/giohang/ttthanhcong.php";
