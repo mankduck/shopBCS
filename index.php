@@ -404,16 +404,15 @@ if (isset($_GET['act']) && $_GET['act']) {
             include "view/thanhtoan/vnpay.php";
             break;
 
-            case 'momo':
-                include "view/thanhtoan/momo.php";
-                break;
-    
+        case 'momo':
+            include "view/thanhtoan/momo.php";
+            break;
+
 
 
 
         case 'ttthanhcong':
             if (isset($_POST['datmua']) && $_POST['datmua']) {
-
 
                 // $idsp = $_SESSION['mycart'][0];
                 // $soluong = $_SESSION['mycart'][4];
@@ -455,7 +454,7 @@ if (isset($_GET['act']) && $_GET['act']) {
                     }
 
                     $_SESSION['mycart'] = [];
-                }elseif ($pttt == 2) {
+                } elseif ($pttt == 2) {
                     insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
 
                     $listdh = loadAll_donhang();
@@ -475,7 +474,7 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                     $_SESSION['mycart'] = [];
                     header("Location: index.php?act=vnpay");
-                }else {
+                } else {
                     insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
 
                     $listdh = loadAll_donhang();

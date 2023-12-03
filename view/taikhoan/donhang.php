@@ -35,8 +35,10 @@
 
                                     if ($pttt == 1) {
                                         echo "Thanh toán khi nhận hàng";
-                                    }else{
+                                    }elseif($pttt == 2){
                                         echo "Chuyển khoản ngân hàng";
+                                    }else{
+                                        echo "Thanh toán qua Momo";
                                     };
                                     echo'
                                     </td>
