@@ -421,18 +421,32 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                 $madonhang = "PMD" . rand(1, 999999);
                 $_SESSION['madonhang'] = $madonhang;
+
                 $hoten = $_POST['hoten'];
+                $_SESSION['hoten'] = $hoten;
+
                 $phone = $_POST['phone'];
+                $_SESSION['phone'] = $phone;
+
                 $diachi = $_POST['address'];
+                $_SESSION['address'] = $diachi;
+
                 $ghichu = $_POST['ghichu'];
+                $_SESSION['ghichu'] = $ghichu;
+
                 $pttt = $_POST['pttt'];
+                $_SESSION['pttt'] = $pttt;
+
                 $tong = $_POST['tong'];
                 $_SESSION['tong'] = $tong;
+
                 $magiamgia = $_POST['magiamgia'];
+                $_SESSION['magiamgia'] = $magiamgia;
 
                 $tinhtrang = 1;
 
                 $ngaydat = date('Y-m-d H:i:s');
+                $_SESSION['ngaydat'] = $ngaydat;
                 $iduser = $_SESSION['user']['id'];
 
 
@@ -455,26 +469,28 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                     $_SESSION['mycart'] = [];
                 } elseif ($pttt == 2) {
-                    insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
-
-                    $listdh = loadAll_donhang();
-                    foreach ($listdh as $key => $value) {
-                        foreach ($_SESSION['mycart'] as $cart) {
-                            $idsp = $cart[0];
-                            $soluong = $cart[4];
-                            $thanhtien = $cart[5];
-
-
-                            $iddonhang = $value['iddonhang'];
-
-                            insert_ctdonhang($idsp, $soluong, $thanhtien, $iddonhang);
-                        }
-                        break;
-                    }
-
-                    $_SESSION['mycart'] = [];
                     header("Location: index.php?act=vnpay");
                 } else {
+
+                    header("Location: index.php?act=momo");
+                }
+            }
+
+            if (isset($_GET['message'])) {
+                if ($_GET['message'] == "Successful.") {
+                    $madonhang = $_SESSION['madonhang'];
+                    $hoten = $_SESSION['hoten'];
+                    $phone = $_SESSION['phone'];
+                    $diachi = $_SESSION['address'];
+                    $ghichu = $_SESSION['ghichu'];
+                    $pttt = $_SESSION['pttt'];
+                    $tong = 0;
+                    $tinhtrang = 1;
+                    $magiamgia = $_SESSION['magiamgia'];
+                    $ngaydat = $_SESSION['ngaydat'];
+                    $iduser = $_SESSION['user']['id'];
+
+
                     insert_donhang($madonhang, $hoten, $phone, $diachi, $magiamgia, $ghichu, $pttt, $tong, $tinhtrang, $ngaydat, $iduser);
 
                     $listdh = loadAll_donhang();
@@ -493,7 +509,9 @@ if (isset($_GET['act']) && $_GET['act']) {
                     }
 
                     $_SESSION['mycart'] = [];
-                    header("Location: index.php?act=momo");
+                } else {
+                    $thongbao = "Bạn đã hủy đơn hàng!";
+                    $_SESSION['mycart'] = [];
                 }
             }
             include "view/giohang/ttthanhcong.php";

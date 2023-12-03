@@ -73,12 +73,30 @@ function update_trangthai($tinhtrang, $iddonhang)
 }
 
 
+function update_tong($tong, $madonhang)
+{
+    $sql = "UPDATE donhang SET tong='$tong' WHERE madonhang='$madonhang'";
+    // var_dump($sql);
+    // die;
+    pdo_execute($sql);
+}
+
+
+
 function loadAll_tinhtrang()
 {
     $sql = "SELECT * FROM tinhtrang";
     $listtt = pdo_query($sql);
     return $listtt; 
 }
+
+
+function delete_donhang($madonhang)
+{
+    $sql = "DELETE FROM donhang WHERE madonhang=" . $madonhang;
+    pdo_execute($sql);
+}
+
 
 
 
