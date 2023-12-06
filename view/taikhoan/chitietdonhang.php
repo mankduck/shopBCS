@@ -16,6 +16,7 @@
                                 <th class="br">Tên</th>
                                 <th class="br">Giá</th>
                                 <th class="br">Số lượng</th>
+                                <th class="br">Phí ship</th>
                                 <th>Thành tiền</th>
 
                             </tr>
@@ -31,6 +32,7 @@
                                     <td class="br">' . $tensanpham . '</td>
                                     <td class="br">'. $price .'</td>
                                     <td class="br">'. $soluong .'</td>
+                                    <td class="br">30000</td>
                                     <td>'. $thanhtien .'</td>';
                             }
                             ?>

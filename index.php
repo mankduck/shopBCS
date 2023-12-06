@@ -484,7 +484,7 @@ if (isset($_GET['act']) && $_GET['act']) {
                     $diachi = $_SESSION['address'];
                     $ghichu = $_SESSION['ghichu'];
                     $pttt = $_SESSION['pttt'];
-                    $tong = 0;
+                    $tong = $_SESSION['tong'];
                     $tinhtrang = 1;
                     $magiamgia = $_SESSION['magiamgia'];
                     $ngaydat = $_SESSION['ngaydat'];
