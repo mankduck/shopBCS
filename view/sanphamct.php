@@ -88,7 +88,7 @@
                         foreach ($spcungloai as $sp) {
                             extract($sp);
                             $image = $img_path . $image;
-                            $linksp = "index.php?act=sanphamct&idsp=" . $id;
+                            $linksp = "index.php?act=sanphamct&idsp=" . $id . "&view=" . $view;
                             echo '
                                 <div class="row spcl">
                                 <img src="' . $image . '" alt="">

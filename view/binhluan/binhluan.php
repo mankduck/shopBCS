@@ -6,6 +6,10 @@ include "../../model/binhluan.php";
 
 
 $dsbl = loadAll_binhluan($idsp);
+// echo '<pre>';
+// echo $idsp;
+// print_r($dsbl);
+// die();
 ?>
 
 <!DOCTYPE html>
@@ -27,13 +31,14 @@ $dsbl = loadAll_binhluan($idsp);
             <div class="box-bl">
                 <?php
                 if (isset($_SESSION['user']['user'])) { ?>
+                            <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                            <input type="text" name="noidung" id="" placeholder="Nhập bình luận của bạn...">
+                            <input type="hidden" name="idsp" value="<?php echo $idsp; ?>">
+                            <input type="hidden" name="iduser" value="<?php echo $_SESSION['user']['id']; ?>">
+                            <input type="submit" value="Đăng" name="guibl">
+                        </form>
 
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                        <input type="text" name="noidung" id="" placeholder="Nhập bình luận của bạn...">
-                        <input type="hidden" name="idsp" value="<?php echo $idsp; ?>">
-                        <input type="submit" value="Đăng" name="guibl">
-                    </form>
-                    ';
+
                 <?php } else { ?>
                     <h1>Đăng nhập để thực hiện chức năng bình luận!</h1>
                 <?php } ?>
@@ -75,10 +80,10 @@ $dsbl = loadAll_binhluan($idsp);
         if (isset($_POST['guibl']) && $_POST['guibl']) {
             $noidung = $_POST['noidung'];
             $idsp = $_POST['idsp'];
-            $user = $_SESSION['user']['user'];
-            $image = $_SESSION['user']['image'];
+            $iduser = $_POST['iduser'];
             $ngaybinhluan = date('h:i:sa d/m/Y');
-            insert_binhluan($noidung, $user, $image, $idsp, $ngaybinhluan);
+            
+            insert_binhluan($noidung, $idsp, $iduser, $ngaybinhluan);
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
         ?>

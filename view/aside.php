@@ -67,7 +67,7 @@
         <?php
         foreach ($dstop10 as $sp) {
             extract($sp);
-            $linksp = "index.php?act=sanphamct&idsp=" . $id;
+            $linksp = "index.php?act=sanphamct&idsp=" . $id . "&view=" . $view;
             $image = $img_path . $image;
 
             echo '

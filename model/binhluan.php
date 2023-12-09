@@ -1,15 +1,18 @@
 <?php
-function insert_binhluan($noidung, $user, $image, $idsp, $ngaybinhluan)
+function insert_binhluan($noidung, $idsp, $iduser, $ngaybinhluan)
 {
-    $sql = "INSERT INTO binhluan(noidung, user, image, idsp, ngaybinhluan) VALUES ('$noidung', '$user', '$image', '$idsp', '$ngaybinhluan')";
+    $sql = "INSERT INTO binhluan(noidung, idsp, ngaybinhluan, iduser) VALUES ('$noidung', '$idsp', '$ngaybinhluan', '$iduser')";
     pdo_execute($sql);
 }
 
 function loadAll_binhluan($idsp)
 {
-    $sql = "SELECT * FROM binhluan WHERE 1";
-    if($idsp > 0){
-        $sql .=  " AND idsp = '".$idsp."'";
+    $sql = "SELECT binhluan.*, taikhoan.user, taikhoan.image
+    FROM binhluan
+    LEFT JOIN taikhoan ON binhluan.iduser = taikhoan.id
+    WHERE 1";
+    if ($idsp > 0) {
+        $sql .= " AND binhluan.idsp = '" . $idsp . "'";
     }
 
     $sql .= " ORDER BY id DESC";
