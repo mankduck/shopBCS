@@ -7,7 +7,9 @@
 3	NGUYEN VAN A	9704 0000 0000 0034	03/07	OTP	Nguồn tiền không đủ
 4	NGUYEN VAN A	9704 0000 0000 0042	03/07	OTP	Hạn mức thẻ
 */
-header('Content-type: text/html; charset=utf-8');
+
+echo '<meta http-equiv="refresh" Content-type: text/html; charset=utf-8">';
+// header('Content-type: text/html; charset=utf-8');
 
 
 function execPostRequest($url, $data)
@@ -38,7 +40,7 @@ $accessKey = 'klm05TvNBzhg7h7j';
 $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 $orderInfo = "Thanh toán qua MoMo";
 $amount = $_SESSION['tong'];
-$orderId = $_SESSION['madonhang'];
+$orderId = rand(10000,99999);
 $redirectUrl = "http://localhost:3000/index.php?act=ttthanhcong";
 $ipnUrl = "http://localhost:3000/index.php?act=ttthanhcong";
 $extraData = "";
@@ -79,6 +81,7 @@ $extraData = "";
 
     //Just a example, please check more in there
 
-    header('Location: ' . $jsonResult['payUrl']);
+    echo '<meta http-equiv="refresh" content="0; url='.$jsonResult['payUrl'].'">';
+    // header('Location: ' . $jsonResult['payUrl']);
 // }
 ?>

@@ -15,13 +15,13 @@
         </ul>
     </div>
     <div class="footer-right">
-        <form action="">
+        <form action="index.php?act=nhanemail" method="POST">
             <div class="row form-footer">
                 <label for="">ĐĂNG KÍ NHẬN EMAIL</label><br>
                 <input type="text" name="email" id="" placeholder="Email nhận tin">
             </div>
             <div class="row form-footer">
-                <input type="button" value="ĐĂNG KÍ">
+                <input type="submit" name="nhanemail" value="ĐĂNG KÍ">
             </div>
         </form>
     </div>

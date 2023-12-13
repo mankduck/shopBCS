@@ -27,8 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cong.forEach(function (cong, index) {
         cong.addEventListener("click", function () {
+
             var currentValue = parseInt(value[index].value);
+            if(currentValue < 10){
             value[index].value = currentValue + 1;
+            }else{
+                value[index].value = 10;
+            };
         });
     });
 
@@ -38,8 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var currentValue = parseInt(value[index].value);
             if (currentValue > 1) {
                 value[index].value = currentValue - 1;
-
-            } else {
+            }else {
                 value[index].value = 1;
             }
         });

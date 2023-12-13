@@ -11,8 +11,12 @@ function delete_sanpham($id)
     pdo_execute($sql);
 }
 
-function loadAll_sanpham($kyw, $iddm)
+function loadAll_sanpham($kyw, $iddm, $page)
 {
+
+    $limit = 9;
+    $start = ($page - 1) * $limit;
+
     $sql = "SELECT * FROM sanpham WHERE 1";
     if ($kyw != "") {
         $sql .= " and tensanpham like '%" . $kyw . "%'";
@@ -22,7 +26,7 @@ function loadAll_sanpham($kyw, $iddm)
         $sql .= " and iddanhmuc = '" . $iddm . "'";
     }
 
-    $sql .= " order by id ASC";
+    $sql .= " order by id ASC LIMIT " . $start . ', ' . $limit;
     $listsanpham = pdo_query($sql);
     return $listsanpham;
 }

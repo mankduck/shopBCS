@@ -39,5 +39,9 @@
             }
             ?>
         </div>
+        <div class="row phantrang">
+            <a href="index.php?act=sanpham&page=1"><button>1</button></a>
+            <a href="index.php?act=sanpham&page=2"><button>2</button></a>
+        </div>
     </div>
 </div>

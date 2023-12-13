@@ -7,6 +7,7 @@ include "model/taikhoan.php";
 include "model/donhang.php";
 include "model/magiamgia.php";
 include "model/validate.php";
+include "model/email.php";
 
 $dsdm = loadAll_danhmuc();
 //AAAA
@@ -75,7 +76,7 @@ if (isset($_GET['act']) && $_GET['act']) {
                 $checklogin = checklogin($user, $password);
                 if (is_array($checklogin)) {
                     $_SESSION['user'] = $checklogin;
-                    header('Location: index.php');
+                    echo '<meta http-equiv="refresh" content="0; url=index.php"';
                 } else {
                     $thongbao = "Tài khoản/ mật khẩu sai, vui lòng kiểm tra lại!";
                 }
@@ -182,7 +183,8 @@ if (isset($_GET['act']) && $_GET['act']) {
                 if (!isset($errUser) && !isset($errEmail)) {
                     update_taikhoan($id, $user, $hoten, $password, $email, $name_img, $address, $phone, $role);
                     $_SESSION['user'] = checklogin($user, $password);
-                    header('Location: index.php?act=dangnhap');
+                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=dangnhap">';
+                    // header('Location: index.php?act=dangnhap');
                 }
             }
             include "view/taikhoan/quanlytk.php";
@@ -254,7 +256,8 @@ if (isset($_GET['act']) && $_GET['act']) {
         //CASE ĐĂNG XUẤT
         case 'dangxuat':
             session_unset();
-            header('Location: index.php?act=index.php');
+            echo '<meta http-equiv="refresh" content="0; url=index.php">';
+            // header('Location: index.php');
             break;
 
 
@@ -289,6 +292,14 @@ if (isset($_GET['act']) && $_GET['act']) {
 
         //CASE SẢN PHẨM
         case 'sanpham':
+
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            }else{
+                $page = 1;
+            }
+
+
             if (isset($_POST['kyw']) && ($_POST['kyw'] != "")) {
                 $kyw = $_POST['kyw'];
             } else {
@@ -301,7 +312,7 @@ if (isset($_GET['act']) && $_GET['act']) {
                 $iddm = 0;
             }
 
-            $dmsp = loadAll_sanpham($kyw, $iddm);
+            $dmsp = loadAll_sanpham($kyw, $iddm, $page);
             $tendm = load_tendm($iddm);
             include "view/sanpham.php";
             break;
@@ -366,7 +377,8 @@ if (isset($_GET['act']) && $_GET['act']) {
             } else {
                 $_SESSION['mycart'] = [];
             }
-            header('Location: index.php?act=viewcart');
+            echo '<meta http-equiv="refresh" content="0; url=index.php?act=viewcart">';
+            // header('Location: index.php?act=viewcart');
             break;
 
 
@@ -469,10 +481,11 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                     $_SESSION['mycart'] = [];
                 } elseif ($pttt == 2) {
-                    header("Location: index.php?act=vnpay");
+                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=vnpay">';
+                    // header("Location: index.php?act=vnpay");
                 } else {
-
-                    header("Location: index.php?act=momo");
+                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=momo">';
+                    // header("Location: index.php?act=momo");
                 }
             }
 
@@ -556,6 +569,16 @@ if (isset($_GET['act']) && $_GET['act']) {
             include "view/taikhoan/chitietdonhang.php";
             break;
 
+
+
+        case 'nhanemail':
+            if (isset($_POST['nhanemail']) && $_POST['nhanemail']) {
+                $email = $_POST['email'];
+                sendMail($email);
+                echo "<script>alert('Đăng kí nhận Email thành công! Vui lòng kiểm tra hòm thư của bạn.')</script>";
+            }
+            include "view/home.php";
+            break;
 
 
         //DEFAULT
