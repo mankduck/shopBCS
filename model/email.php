@@ -1,4 +1,6 @@
 <?php
+
+
 function sendMail($email)
 {
     // $randomNumber_maxacnhan = random_int(10000, 99999);

@@ -202,6 +202,14 @@ if (isset($_GET['act'])) {
 
 
         case 'listsp':
+
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            }else{
+                $page = 1;
+            }
+
+
             if (isset($_POST['listok']) && $_POST['listok']) {
                 $kyw = $_POST['kyw'];
                 $iddm = $_POST['iddm'];
@@ -210,7 +218,7 @@ if (isset($_GET['act'])) {
                 $iddm = 0;
             }
             $listdanhmuc = loadAll_danhmuc();
-            $listsanpham = loadAll_sanpham($kyw, $iddm);
+            $listsanpham = loadAll_sanpham($kyw, $iddm, $page);
             include "sanpham/list.php";
             break;
 
@@ -227,6 +235,14 @@ if (isset($_GET['act'])) {
 
 
         case 'xoasp':
+
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            }else{
+                $page = 1;
+            }
+
+
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $spdaxoa = loadOne_sanpham($_GET['id']);
                 extract($spdaxoa);
@@ -234,7 +250,7 @@ if (isset($_GET['act'])) {
                 insert_sanphamdx($tensanpham, $price, $image, $mota, $iddanhmuc, $ngayxoa);
                 delete_sanpham($_GET['id']);
             }
-            $listsanpham = loadAll_sanpham("", 0);
+            $listsanpham = loadAll_sanpham("", 0, $page);
             include "sanpham/list.php";
             break;
 
@@ -277,6 +293,14 @@ if (isset($_GET['act'])) {
 
 
         case 'updatesp':
+
+            if(isset($_GET['page'])){
+                $page = $_GET['page'];
+            }else{
+                $page = 1;
+            }
+
+            
             if (isset($_POST['capnhat']) && $_POST['capnhat']) {
                 $tensp = $_POST['tensp'];
                 $giasp = $_POST['giasp'];
@@ -295,7 +319,7 @@ if (isset($_GET['act'])) {
                 $thongbao = "Cập nhật thành công!";
             }
             $listdanhmuc = loadAll_danhmuc();
-            $listsanpham = loadAll_sanpham("", 0);
+            $listsanpham = loadAll_sanpham("", 0, $page);
             include "sanpham/list.php";
             break;
 

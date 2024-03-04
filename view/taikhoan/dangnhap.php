@@ -7,7 +7,7 @@
             if (is_file($hinh)) {
                 $image = "<img src='" . $hinh . "' width='100'>";
             } else {
-                $image ="<img src='view/image/anhmacdinh.jpg' width='100'>";
+                $image = "<img src='view/image/anhmacdinh.jpg' width='100'>";
             }
             ?>
 
@@ -29,8 +29,7 @@
                 <a href="index.php?act=doimk"><input type="button" value="Đổi mật khẩu"></a>
                 <a href="index.php?act=donhang"><input type="button" value="Đơn hàng"></a>
                 <?php if ($role == 1) { ?>
-                    <a href="admin/index.php"><input type="button"
-                            value="Đến trang admin"></a>
+                    <a href="admin/index.php"><input type="button" value="Đến trang admin"></a>
                 <?php }
                 ; ?>
                 <a href="index.php?act=dangxuat"><input type="button" value="Đăng xuất"></a>
@@ -57,11 +56,14 @@
                         <input type="submit" value="Đăng nhập" name="dangnhap"><br>
                     </div>
                 </form>
-                <?php
-                if (isset($thongbao)) {
-                    echo $thongbao;
-                }
-                ?>
+                <div class="row mb10 err">
+                    <?php
+                    if (isset($thongbao)) {
+                        echo '<h2>'.$thongbao.'</h2>';
+                    }
+                    ?>
+                </div>
+
                 <li><a href="index.php?act=quenmk">Quên mật khẩu</a></li>
                 <li><a href="index.php?act=dangky">Đăng kí thành viên</a></li>
             </div>

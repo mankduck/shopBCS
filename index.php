@@ -74,9 +74,15 @@ if (isset($_GET['act']) && $_GET['act']) {
                 //Kiểm tra bằng hàm checkLogin trong model
 
                 $checklogin = checklogin($user, $password);
+                // echo '<pre>';
+                // var_dump($user, $password, $checklogin);
+                // die();
+
                 if (is_array($checklogin)) {
                     $_SESSION['user'] = $checklogin;
-                    echo '<meta http-equiv="refresh" content="0; url=index.php"';
+                    echo '<script>alert("Đăng nhập thành công!");
+                    window.location.href = "index.php";
+                    </script>';
                 } else {
                     $thongbao = "Tài khoản/ mật khẩu sai, vui lòng kiểm tra lại!";
                 }
@@ -183,7 +189,8 @@ if (isset($_GET['act']) && $_GET['act']) {
                 if (!isset($errUser) && !isset($errEmail)) {
                     update_taikhoan($id, $user, $hoten, $password, $email, $name_img, $address, $phone, $role);
                     $_SESSION['user'] = checklogin($user, $password);
-                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=dangnhap">';
+                    echo '<script>window.location.href = "index.php?act=dangnhap"</script>';
+                    // echo '<meta http-equiv="refresh" content="0; url=index.php?act=dangnhap">';
                     // header('Location: index.php?act=dangnhap');
                 }
             }
@@ -256,7 +263,9 @@ if (isset($_GET['act']) && $_GET['act']) {
         //CASE ĐĂNG XUẤT
         case 'dangxuat':
             session_unset();
-            echo '<meta http-equiv="refresh" content="0; url=index.php">';
+            echo '<script>alert("Đăng xuất thành công!");
+            window.location.href = "index.php";
+            </script>';
             // header('Location: index.php');
             break;
 
@@ -293,9 +302,9 @@ if (isset($_GET['act']) && $_GET['act']) {
         //CASE SẢN PHẨM
         case 'sanpham':
 
-            if(isset($_GET['page'])){
+            if (isset($_GET['page'])) {
                 $page = $_GET['page'];
-            }else{
+            } else {
                 $page = 1;
             }
 
@@ -377,7 +386,10 @@ if (isset($_GET['act']) && $_GET['act']) {
             } else {
                 $_SESSION['mycart'] = [];
             }
-            echo '<meta http-equiv="refresh" content="0; url=index.php?act=viewcart">';
+            echo '<script>
+            window.location.href = "index.php?act=viewcart";
+            </script>';
+            // echo '<meta http-equiv="refresh" content="0; url=">';
             // header('Location: index.php?act=viewcart');
             break;
 
@@ -481,10 +493,12 @@ if (isset($_GET['act']) && $_GET['act']) {
 
                     $_SESSION['mycart'] = [];
                 } elseif ($pttt == 2) {
-                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=vnpay">';
+                    echo '<script>window.location.href = "index.php?act=vnpay"</script>';
+                    // echo '<meta http-equiv="refresh" content="0; url=index.php?act=vnpay">';
                     // header("Location: index.php?act=vnpay");
                 } else {
-                    echo '<meta http-equiv="refresh" content="0; url=index.php?act=momo">';
+                    echo '<script>window.location.href = "index.php?act=momo"</script>';
+                    // echo '<meta http-equiv="refresh" content="0; url=index.php?act=momo">';
                     // header("Location: index.php?act=momo");
                 }
             }
